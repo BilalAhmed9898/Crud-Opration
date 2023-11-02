@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../App.css'
 function Add() {
   const [formData, setFormData] = useState({
     title: '',
@@ -22,6 +22,16 @@ function Add() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      formData.title.trim() === '' ||
+      formData.disc.trim() === '' ||
+      formData.price === '' ||
+      formData.cover.trim() === ''
+    ) {
+      // You can display an error message or take appropriate action here
+      alert('Please fill in all fields');
+      return;
+    }
     try {
       await axios.post("http://localhost:3001/books", formData);
       navigate("/");
@@ -31,9 +41,9 @@ function Add() {
   };
 
   return (
-    <div className='form'>
+    <div className='AddBook'>
       <h1>Add Book</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
