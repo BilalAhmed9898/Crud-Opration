@@ -1,16 +1,47 @@
+.body{
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+.mainpage{
+  display: flex;
+  flex-direction: column;
+  background-color: #1B3358;
+}
+.mainpage h1{
+  color: white;
+  text-align: center;
+  margin: 20px 40px;
+}
+.mainpage button{
+  outline: none;
+  border: none;
+  width: 30%;
+  margin: 50px auto;
+  padding: 15px 10px;
+  border-radius: 10px;
+  background-color: white;
+  font-weight: 600;
+  color: black;
+}
+.mainpage button a{ 
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
 .main{
   width: 90vw;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  margin: 10% auto;
+  margin: 5% auto;
   gap: 20px;
 }
 .main .card{
   width:300px;
   height: auto;
+  background-color: white;
   padding: 20px 30px ;
   border-radius: 10px;
   color: black;
@@ -21,6 +52,15 @@
   object-fit: cover;
   background-color: aquamarine;
 }
+.main .delete{
+  color: red;
+  font-family: 'Poppins', sans-serif;
+}
+.main .update{
+  color: green;
+  font-family: 'Poppins', sans-serif;
+}
+
 /* styles.css */
 
 .AddBook {
@@ -53,8 +93,4 @@ button {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
 }

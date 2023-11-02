@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import '../App.css';
 
@@ -20,27 +20,30 @@ function Books() {
 
     fetchAllBooks();
   }, []);
-  const handledelete = async(id)=>{
-    try{
-     await axios.delete("http://localhost:3001/books/"+id)
-     window.location.reload();
+  const handledelete = async (id) => {
+    try {
+      await axios.delete("http://localhost:3001/books/" + id)
+      window.location.reload();
     }
-    catch(err){
+    catch (err) {
       console.log(err)
     }
   }
   return (
-    <div className='main'>
-      {data.map((item, i) => (
-        <div className='card' key={i}>
-          <img src={item.cover} alt="" />
-          <h2>{item.title}</h2>
-          <h4>{item.disc}</h4>
-          <h6>{item.cover}</h6>
-          <button onClick={()=> handledelete(item.id)}>Delete</button>
-          <button><Link to={`/Edit/${item.id}`}>Update</Link></button>
-        </div> 
-      ))}
+    <div className="mainpage">
+       <h1>Book Avaiable in Store !</h1>
+      <div className='main'>
+        {data.map((item, i) => (
+          <div className='card' key={i}>
+            <img src={item.cover} alt="" />
+            <h3>{item.title}</h3>
+            <p>{item.disc}</p>
+            <p>Rs {item.price}/=</p>
+            <button className='delete' onClick={() => handledelete(item.id)}>Delete</button>
+            <button className='update'><Link to={`/Edit/${item.id}`}>Update</Link></button>
+          </div>
+        ))}
+      </div>
       <button><Link to="/Add">Add Book</Link></button>
     </div>
   );
