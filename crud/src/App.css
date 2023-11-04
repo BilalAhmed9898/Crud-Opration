@@ -1,19 +1,53 @@
-.body{
+.body {
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
 }
-.mainpage{
+
+.mainpage {
   display: flex;
   flex-direction: column;
   background-color: #1B3358;
 }
-.mainpage h1{
+
+.mainpage h1 {
   color: white;
   text-align: center;
-  margin: 20px 40px;
+  margin: 60px 40px;
 }
-.mainpage button{
+.mainpage .functions{
+  margin: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.mainpage .functions input {
+  width: 350px;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  margin: auto;
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+  padding: 15px 20px;
+  border-radius: 10px;
+}
+.mainpage .functions button {
+  width: 350px;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  margin: auto;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 15px 20px;
+  color: gray;
+  border-radius: 10px;
+}
+
+.mainpage button {
   outline: none;
   border: none;
   width: 30%;
@@ -24,39 +58,46 @@
   font-weight: 600;
   color: black;
 }
-.mainpage button a{ 
+
+.mainpage button a {
   text-decoration: none;
   font-family: 'Poppins', sans-serif;
 }
-.main{
+
+.main {
   width: 90vw;
   height: auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  font-family: 'Poppins', sans-serif;
   justify-content: center;
   margin: 5% auto;
   gap: 20px;
 }
-.main .card{
-  width:300px;
+
+.main .card {
+  width: 280px;
   height: auto;
   background-color: white;
-  padding: 20px 30px ;
+  padding: 20px 30px;
   border-radius: 10px;
   color: black;
 }
-.main .card img{
-  width: 300px;
-  height: 300px;
+
+.main .card img {
+  width: 280px;
+  height: 400px;
   object-fit: cover;
   background-color: aquamarine;
 }
-.main .delete{
+
+.main .delete {
   color: red;
   font-family: 'Poppins', sans-serif;
 }
-.main .update{
+
+.main .update {
   color: green;
   font-family: 'Poppins', sans-serif;
 }
@@ -74,6 +115,7 @@
 .form {
   width: 300px;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
   background-color: #0056b3;
   padding: 30px 50px;
 }
@@ -83,6 +125,7 @@
   outline: none;
   border: none;
   padding: 10px 0px;
+  font-family: 'Poppins', sans-serif;
   border-bottom: 1px solid gray;
   margin-bottom: 10px;
 }
@@ -92,5 +135,6 @@ button {
   color: white;
   padding: 10px 20px;
   border: none;
+  width: 280px;
   cursor: pointer;
 }

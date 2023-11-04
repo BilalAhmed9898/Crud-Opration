@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate , useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../App.css'
 
 function Edit() {
@@ -10,7 +10,7 @@ function Edit() {
     price: '',
     cover: '',
   });
-  
+
   const { id } = useParams();
 
   const handleChange = (e) => {
@@ -25,7 +25,7 @@ function Edit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put("http://localhost:3001/books/"+id, formData);
+      await axios.put("http://localhost:3001/books/" + id, formData);
       navigate("/");
     } catch (err) {
       console.log(err);

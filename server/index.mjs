@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import multer from "multer";
 import path from "path";
-import db from './config.mjs'; 
+import db from './config.mjs';
 
 
 const app = express();
@@ -15,27 +15,26 @@ app.use(express.static('public'))
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/images'); // Destination folder for uploaded files
+    cb(null, './public/images'); // Destination folder for uploaded files
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '_' + Date.now() + '_' + path.extname(file.originalname)); // Rename the file
   },
 });
 
-const upload = multer({ storage:storage });
+const upload = multer({ storage: storage });
 
 
-app.get('/books', (req, res) => {
+app.get('/', (req, res) => {
   const q = "SELECT * FROM books";
   db.query(q, (err, data) => {
     if (err) {
       console.error('Error executing the query:', err);
       return res.status(500).json({ error: "Error Occurred" });
     }
-    // console.log(data)
     return res.json(data);
   });
-  });
+});
 
 app.post('/books', upload.single('cover'), (req, res) => {
   console.log(req.file)
@@ -55,33 +54,30 @@ app.post('/books', upload.single('cover'), (req, res) => {
   });
 });
 
-
-
- app.put("/books/:id",(req,res)=>{
-   const bookId =req.params.id;
-   const q = "UPDATE books SET `title`=? ,`disc`=? , `price`= ? ,`cover`=? WHERE id = ? "
-   const values = [
+app.put("/books/:id", (req, res) => {
+  const bookId = req.params.id;
+  const q = "UPDATE books SET `title`=? ,`disc`=? , `price`= ? ,`cover`=? WHERE id = ? "
+  const values = [
     req.body.title,
     req.body.disc,
     req.body.price,
     req.body.cover,
   ];
-   db.query(q, [...values,bookId], (err, data) => {
+  db.query(q, [...values, bookId], (err, data) => {
     if (err) return res.send(err);
     return res.json("Book has been Updated Successfully !");
   });
- })
+})
 
- app.delete("/books/:id",(req,res)=>{
-   const bookId =req.params.id;
-   const q = "DELETE FROM books WHERE id = ?"
-   db.query(q, [bookId], (err, data) => {
+app.delete("/books/:id", (req, res) => {
+  const bookId = req.params.id;
+  console.log(bookId)
+  const q = "DELETE FROM books WHERE id = ?"
+  db.query(q, [bookId], (err, data) => {
     if (err) return res.send(err);
     return res.json("Book Deleted Successfully ! ");
   });
- })
-
-
+})
 
 
 app.listen(port, () => {

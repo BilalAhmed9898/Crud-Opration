@@ -14,7 +14,7 @@ function Add() {
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     const newValue = type === 'file' ? e.target.files[0] : value;
-    
+
     setFormData({
       ...formData,
       [name]: newValue,
