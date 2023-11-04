@@ -31,7 +31,7 @@ function Books() {
     try {
       await axios.delete("http://localhost:3001/books/" + id);
       window.location.reload();
-      alert("Book Was Deleted!");
+      alert("Book has been Deleted!");
     } catch (err) {
       console.error("Error deleting book:", err);
       setError("Error deleting the book. Please check the server.");
@@ -72,6 +72,9 @@ function Books() {
       <button onClick={toggleSortOrder}>
         Sort {sortBy === 'asc' ? 'Ascending' : 'Descending'}
       </button>
+      <button>
+        <Link to="/Add">Add Book</Link>
+      </button>
      </div>
       <div className="main">
         {filteredData.map((item, i) => (
@@ -91,9 +94,6 @@ function Books() {
           </div>
         ))}
       </div>
-      <button>
-        <Link to="/Add">Add Book</Link>
-      </button>
     </div>
   );
 }

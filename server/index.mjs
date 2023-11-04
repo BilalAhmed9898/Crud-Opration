@@ -42,7 +42,6 @@ app.post('/books', upload.single('cover'), (req, res) => {
   const cover = req.file.filename; // Get the filename of the uploaded file
   const sql = 'INSERT INTO books (title, disc, price, cover) VALUES (?, ?, ?, ?)';
   const values = [title, disc, price, cover];
-
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error('Error inserting data: ' + err);
@@ -54,15 +53,13 @@ app.post('/books', upload.single('cover'), (req, res) => {
   });
 });
 
-app.put("/books/:id", (req, res) => {
+app.put("/books/:id",upload.single('cover'), (req, res) => {
   const bookId = req.params.id;
+  const { title, disc, price } = req.body;
+  const cover = req.file ? req.file.filename : null; 
+  const values = [title, disc, price, cover];
   const q = "UPDATE books SET `title`=? ,`disc`=? , `price`= ? ,`cover`=? WHERE id = ? "
-  const values = [
-    req.body.title,
-    req.body.disc,
-    req.body.price,
-    req.body.cover,
-  ];
+
   db.query(q, [...values, bookId], (err, data) => {
     if (err) return res.send(err);
     return res.json("Book has been Updated Successfully !");

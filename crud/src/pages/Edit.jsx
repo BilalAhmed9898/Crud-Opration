@@ -1,32 +1,53 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../App.css'
+import '../App.css';
 
 function Edit() {
   const [formData, setFormData] = useState({
     title: '',
     disc: '',
     price: '',
-    cover: '',
+    cover: null, // Change the initial value for the cover to null
   });
 
-  const { id } = useParams();
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+    const newValue = type === 'file' ? e.target.files[0] : value;
+
     setFormData({
-      ...formData, [name]: value,
+      ...formData,
+      [name]: newValue,
     });
   };
-
-  const navigate = useNavigate(); // Fix missing function call
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      formData.title.trim() === '' ||
+      formData.disc.trim() === '' ||
+      formData.price === '' ||
+      formData.cover === null // Check if the cover is null
+    ) {
+      alert('Please fill in all fields');
+      return;
+    }
     try {
-      await axios.put("http://localhost:3001/books/" + id, formData);
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('disc', formData.disc);
+      formDataToSend.append('price', formData.price);
+      formDataToSend.append('cover', formData.cover);
+      console.log(formDataToSend)
+      await axios.put("http://localhost:3001/books/"+id, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       navigate("/");
+      alert('Book has been updated!')
     } catch (err) {
       console.log(err);
     }
@@ -58,10 +79,8 @@ function Edit() {
           onChange={handleChange}
         />
         <input
-          type="text"
+          type="file" // Change the input type to "file" for cover image
           name="cover"
-          placeholder='Cover'
-          value={formData.cover}
           onChange={handleChange}
         />
         <button type="submit">Add</button>
